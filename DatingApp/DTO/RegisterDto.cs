@@ -12,6 +12,7 @@ namespace DatingApp.DTO
         [StringLength(maximumLength:15,MinimumLength =5)]
         public string UserName { get; set; }
         [Required]
+        [StringLength(8,MinimumLength =4)]
         public string Password { get; set; }
     }
 }
