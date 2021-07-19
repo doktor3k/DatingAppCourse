@@ -15,7 +15,7 @@ namespace DatingApp.Entities
 
         public byte[] PasswordSalt { get; set; }
 
-        public DateTime DateOfBrith { get; set; }
+        public DateTime DateOfBirth { get; set; }
 
         public string KnownAs { get; set; }
 
@@ -37,11 +37,9 @@ namespace DatingApp.Entities
 
         public ICollection<Photo> Photos { get; set; }
 
-        public int GetAge()
-        {
-
-
-            return DateOfBrith.CalculateAge();
-        }
+        //public int GetAge()
+        //{
+        //    return DateOfBrith.CalculateAge();
+        //}
     }
 }

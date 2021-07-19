@@ -20,38 +20,29 @@ namespace DatingApp.Controllers
        
         private readonly IUserRepository _userRepository;
         private readonly IMapper _mapper;
-        private readonly DataContext context;
+        private readonly DataContext _context;
 
         public UsersController(IUserRepository userRepository, IMapper mapper, DataContext context)
         {
         
             this._userRepository = userRepository;
             this._mapper = mapper;
-            this.context = context;
+            this._context = context;
         }
         [HttpGet]
         [AllowAnonymous]
         public async Task<ActionResult<IEnumerable<MemberDto>>> GetUsers()
         {
-            var users = await _userRepository.GetUsersAsync();
-            var usersToRetune = _mapper.Map<IEnumerable<MemberDto>>(users);
-            return Ok(usersToRetune);
-        }
-        [HttpGet("users1")]
-        [AllowAnonymous]
-        public async Task<ActionResult<IEnumerable<AppUser>>> GetUsers1()
-        {
-            var users = await context.Users.ToListAsync();
-          //  var usersToRetune = _mapper.Map<IEnumerable<MemberDto>>(users);
+            var users = await _userRepository.GetMembersAsync();
             return Ok(users);
         }
+        
 
         [HttpGet("{username}")]
         public async Task<ActionResult<MemberDto>> GetUser(string username)
         {
-            var user = await _userRepository.GetUserByUserNameAsync(username);
-            var userToReturn = _mapper.Map<MemberDto>(user);
-            return Ok(userToReturn);
+            return await _userRepository.GetMemberAsync(username);
+           
 
         }
     }
